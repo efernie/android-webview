@@ -3,13 +3,34 @@
       package="com.MyMobileWebApp"
       android:versionCode="1"
       android:versionName="1.0">
-    <application android:label="@string/app_name" android:icon="@drawable/ic_launcher">
-        <activity android:name="MainActivity"
-                  android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-    </application>
+
+  <!-- Set your permissions here -->
+  <uses-permission android:name="android.permission.INTERNET" />
+
+  <uses-sdk
+    android:minSdkVersion="8"
+    android:targetSdkVersion="17" />
+
+  <application
+    android:label="@string/app_name"
+    android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+    android:debuggable="true"
+    android:enabled="true"
+    android:allowClearUserData="true"
+    android:icon="@drawable/ic_launcher"
+    android:hardwareAccelerated="true"
+    android:name="App">
+
+      <activity
+        android:name="MyMobileWebApp"
+        android:configChanges="orientation|screenSize"
+        android:screenOrientation="portrait"
+        android:label="@string/app_name">
+
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+      </activity>
+  </application>
 </manifest>
