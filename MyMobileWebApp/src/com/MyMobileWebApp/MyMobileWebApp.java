@@ -63,7 +63,7 @@ public class MyMobileWebApp extends Activity {
     Log.d("MyMobileWebApp","on create");
     // switch the url from dev to production
     if (DEVELOPMENT) {
-      url = "http://192.168.1.143:3000";
+      url = "http://192.168.5.103:3000";
     } else {
       url = "https://someproductionurl";
     }
@@ -81,6 +81,9 @@ public class MyMobileWebApp extends Activity {
     web.addJavascriptInterface(new WebAppInterface(this), "Android");
     Log.d("MyMobileWebApp","set client");
     web.setWebViewClient(webClient);
+
+    // Load the site
+    web.loadUrl(url);
 
     // for debug purposes to cathc console.log in the adb shell
     web.setWebChromeClient(new WebChromeClient() {
