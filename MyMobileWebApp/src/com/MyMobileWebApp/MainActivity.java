@@ -11,21 +11,33 @@ import android.webkit.WebViewClient;
 import android.webkit.WebChromeClient;
 import android.webkit.JavascriptInterface;
 
+// uri methods
+import android.net.Uri;
+
+// intent
+import android.content.Intent;
+
+// key events
+import android.view.KeyEvent;
+
+//context
+import android.content.Context;
+
+// log imports
+import android.util.Log;
+import android.webkit.ConsoleMessage;
+
 public class MainActivity extends Activity {
   // Logging stuffs
   private static final String TAG = "MyMobileWebApp";
   private static final boolean VERBOSE = true;
-  private static final boolean DEVELOPMENT = false;
+  private static final boolean DEVELOPMENT = true;
 
   private static String url;
 
   private WebView web;
 
   private WebViewClient webClient = new WebViewClient() {
-
-    public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-      progressDialog.dismiss();
-    }
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -48,8 +60,9 @@ public class MainActivity extends Activity {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
+    // switch the url from dev to production
     if (DEVELOPMENT) {
-      url = "http://wifiip";
+      url = "http://192.168.1.143:3000";
     } else {
       url = "https://someproductionurl";
     }
@@ -58,14 +71,17 @@ public class MainActivity extends Activity {
 
     web = (WebView)findViewById(R.id.web);
 
+    // If you want javascript enabled!!
     web.getSettings().setJavaScriptEnabled(true);
+    // For local storage/cookies
     web.getSettings().setDomStorageEnabled(true);
 
+    // For exposing native functions to javacsript
     web.addJavascriptInterface(new WebAppInterface(this), "Android");
 
     web.setWebViewClient(webClient);
 
-    // for debug purposes
+    // for debug purposes to cathc console.log in the adb shell
     web.setWebChromeClient(new WebChromeClient() {
       public boolean onConsoleMessage(ConsoleMessage cm) {
         if (VERBOSE) Log.d(TAG, cm.message() + " -- From line "
@@ -77,6 +93,7 @@ public class MainActivity extends Activity {
 
   }
 
+  // WHere you can place native functions to expose them to javascript!
   public class WebAppInterface {
     Context mContext;
 
