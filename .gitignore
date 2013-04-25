@@ -1,20 +1,17 @@
 # built application files
-*.apk
-*.ap_
+MyMobileWebApp/*.apk
+MyMobileWebApp/*.ap_
 
 # files for the dex VM
-*.dex
+MyMobileWebApp/*.dex
 
 # Java class files
-*.class
+MyMobileWebApp/*.class
 
 # generated files
-bin/
-gen/
+MyMobileWebApp/bin/
+MyMobileWebApp/gen/
 
 # Local configuration file (sdk path, etc)
-local.properties
+MyMobileWebApp/local.properties
 
-# Eclipse project files
-.classpath
-.project
